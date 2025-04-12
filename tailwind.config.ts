@@ -10,55 +10,56 @@ export default {
   theme: {
   	extend: {
   		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
+        //Color Palette
+  			background: 'hsl(240, 6.1%, 97.1%)', // Light Gray
+  			foreground: 'hsl(0, 0%, 3.9%)',
   			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
+  				DEFAULT: 'hsl(240, 6.1%, 97.1%)',// Light Gray
+  				foreground: 'hsl(0, 0%, 3.9%)'
   			},
   			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
+  				DEFAULT: 'hsl(0, 0%, 100%)',
+  				foreground: 'hsl(0, 0%, 3.9%)'
   			},
   			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
+  				DEFAULT: 'hsl(262.5, 66.7%, 85.3%)',// Soft Lavender
+  				foreground: 'hsl(240, 5.9%, 10%)'
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
+  				DEFAULT: 'hsl(240, 6.1%, 97.1%)',// Light Gray
+  				foreground: 'hsl(0, 0%, 9%)'
   			},
   			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
+  				DEFAULT: 'hsl(0, 0%, 96.1%)',
+  				foreground: 'hsl(0, 0%, 45.1%)'
   			},
   			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
+  				DEFAULT: 'hsl(180, 100%, 25%)',// Teal
+  				foreground: 'hsl(0, 0%, 98%)'
   			},
   			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
+  				DEFAULT: 'hsl(0, 84.2%, 60.2%)',
+  				foreground: 'hsl(0, 0%, 98%)'
   			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
+  			border: 'hsl(0, 0%, 89.8%)',
+  			input: 'hsl(0, 0%, 89.8%)',
+  			ring: 'hsl(0, 0%, 3.9%)',
   			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
+  				'1': 'hsl(12, 76%, 61%)',
+  				'2': 'hsl(173, 58%, 39%)',
+  				'3': 'hsl(197, 37%, 24%)',
+  				'4': 'hsl(43, 74%, 66%)',
+  				'5': 'hsl(27, 87%, 67%)'
   			},
   			sidebar: {
-  				DEFAULT: 'hsl(var(--sidebar-background))',
-  				foreground: 'hsl(var(--sidebar-foreground))',
-  				primary: 'hsl(var(--sidebar-primary))',
-  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-  				accent: 'hsl(var(--sidebar-accent))',
-  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-  				border: 'hsl(var(--sidebar-border))',
-  				ring: 'hsl(var(--sidebar-ring))'
+  				DEFAULT: 'hsl(0, 0%, 98%)',
+  				foreground: 'hsl(240, 5.3%, 26.1%)',
+  				primary: 'hsl(240, 5.9%, 10%)',
+  				'primary-foreground': 'hsl(0, 0%, 98%)',
+  				accent: 'hsl(240, 4.8%, 95.9%)',
+  				'accent-foreground': 'hsl(240, 5.9%, 10%)',
+  				border: 'hsl(220, 13%, 91%)',
+  				ring: 'hsl(217.2, 91.2%, 59.8%)'
   			}
   		},
   		borderRadius: {
@@ -92,3 +93,5 @@ export default {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
+    

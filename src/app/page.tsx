@@ -4,7 +4,6 @@ import {useState} from 'react';
 import {useToast} from '@/hooks/use-toast';
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
-import {Input} from '@/components/ui/input';
 import {Textarea} from '@/components/ui/textarea';
 import {FileUpload} from '@/components/file-upload';
 import {Separator} from '@/components/ui/separator';
@@ -12,6 +11,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/c
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {z} from 'zod';
+import {generatePoem} from '@/ai/flows/poem-generation';
 
 const toneOptions = [
   'happy',
@@ -53,19 +53,8 @@ export default function Home() {
 
     setLoading(true);
     try {
-      // Here you would normally call the Genkit flow, but since we're disabling Genkit:
-      // 1. Remove the call to generatePoem or generatePoemWithTone
-      // 2. Replace with a placeholder poem.
-      // let poemResult;
-      // if (selectedTone) {
-      //   poemResult = await generatePoemWithTone({imageUrl: imageUrl, tone: selectedTone});
-      // } else {
-      //   poemResult = await generatePoem({imageUrl: imageUrl});
-      // }
-      // setPoem(poemResult?.poem || 'Failed to generate poem.');
-      
-      // Set a placeholder poem instead
-      setPoem('This is a placeholder poem. GenAI features are disabled.');
+      const poemResult = await generatePoem({imageUrl: imageUrl, tone: selectedTone});
+      setPoem(poemResult?.poem || 'Failed to generate poem.');
 
       toast({
         title: 'Poem Generated',
@@ -127,7 +116,7 @@ export default function Home() {
               <Button
                 onClick={handleGeneratePoem}
                 disabled={loading}
-                className="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/80"
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/80"
               >
                 {loading ? 'Generating...' : 'Generate Poem'}
               </Button>
@@ -159,3 +148,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
