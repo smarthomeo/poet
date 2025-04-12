@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_PUBLIC_ELEVEN_LABS_API_KEY = "sk_373272f7a9c609851e62b6110ffa72585458e19fac7124e3"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 

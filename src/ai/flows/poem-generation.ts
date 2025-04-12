@@ -14,6 +14,8 @@ import {z} from 'genkit';
 const GeneratePoemInputSchema = z.object({
   imageUrl: z.string().describe('The URL of the image to inspire the poem.'),
   tone: z.string().optional().describe('The desired tone of the poem (e.g., happy, sad, reflective).'),
+  numStanzas: z.number().min(1).max(10).default(3).describe('Number of stanzas in the poem.'),
+  linesPerStanza: z.number().min(2).max(10).default(4).describe('Number of lines per stanza.'),
 });
 export type GeneratePoemInput = z.infer<typeof GeneratePoemInputSchema>;
 
@@ -32,6 +34,8 @@ const poemPrompt = ai.definePrompt({
     schema: z.object({
       imageUrl: z.string().describe('The URL of the image to inspire the poem.'),
       tone: z.string().optional().describe('The desired tone of the poem (e.g., happy, sad, reflective).'),
+      numStanzas: z.number().min(1).max(10).describe('Number of stanzas in the poem.'),
+      linesPerStanza: z.number().min(2).max(10).describe('Number of lines per stanza.'),
     }),
   },
   output: {
@@ -40,8 +44,8 @@ const poemPrompt = ai.definePrompt({
     }),
   },
   prompt: `You are a poet. Generate a poem based on the image provided.
-The poem should be at least 3 stanzas.
-Each stanza should be 4-8 lines long.
+The poem should have exactly {{numStanzas}} stanzas.
+Each stanza should have exactly {{linesPerStanza}} lines.
 The poem should evoke the imagery of the photo.
 
 {{#if tone}}
