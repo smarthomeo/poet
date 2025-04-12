@@ -1,4 +1,4 @@
-import {useState, useCallback, useEffect} from 'react';
+import {useState, useCallback} from 'react';
 import {useDropzone} from 'react-dropzone';
 import {toast} from '@/hooks/use-toast';
 import {Button} from '@/components/ui/button';
@@ -11,7 +11,7 @@ export function FileUpload({setImageUrl}: FileUploadProps) {
   const [file, setFile] = useState<File | null>(null);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    const file = acceptedFiles[0];
+    const file = acceptedFiles[0] as File;
     setFile(file);
 
     // Create a local URL for the file
