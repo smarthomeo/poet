@@ -25,6 +25,19 @@ export async function generatePoemWithTone(input: GeneratePoemWithToneInput): Pr
   return generatePoemWithToneFlow(input);
 }
 
+async function blobUrlToDataUrl(blobUrl: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    fetch(blobUrl)
+      .then(res => res.blob())
+      .then(blob => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+  });
+}
+
 const prompt = ai.definePrompt({
   name: 'generatePoemWithTonePrompt',
   input: {
@@ -54,6 +67,10 @@ const generatePoemWithToneFlow = ai.defineFlow<
   inputSchema: GeneratePoemWithToneInputSchema,
   outputSchema: GeneratePoemWithToneOutputSchema,
 }, async input => {
-  const {output} = await prompt(input);
+  let imageUrl = input.imageUrl;
+    if (imageUrl.startsWith('blob:')) {
+      imageUrl = await blobUrlToDataUrl(imageUrl);
+    }
+  const {output} = await prompt({...input, imageUrl});
   return output!;
 });
