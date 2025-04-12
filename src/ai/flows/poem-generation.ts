@@ -48,7 +48,7 @@ The tone of the poem should be {{tone}}.
 {{/if}}
 
 Here is the image:
-{{media url=imageUrl}}`,
+{{media url=imageUrl contentType="image/jpeg"}}`,
 });
 
 const poemFlow = ai.defineFlow<
@@ -65,5 +65,3 @@ const poemFlow = ai.defineFlow<
     return output!;
   }
 );
-
-    
