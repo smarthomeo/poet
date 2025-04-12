@@ -2,8 +2,6 @@
 
 import {useState} from 'react';
 import {useToast} from '@/hooks/use-toast';
-import {generatePoem} from '@/ai/flows/poem-generation';
-import {generatePoemWithTone} from '@/ai/flows/tone-adjustment';
 import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
@@ -55,14 +53,20 @@ export default function Home() {
 
     setLoading(true);
     try {
-      let poemResult;
-      if (selectedTone) {
-        poemResult = await generatePoemWithTone({imageUrl: imageUrl, tone: selectedTone});
-      } else {
-        poemResult = await generatePoem({imageUrl: imageUrl});
-      }
+      // Here you would normally call the Genkit flow, but since we're disabling Genkit:
+      // 1. Remove the call to generatePoem or generatePoemWithTone
+      // 2. Replace with a placeholder poem.
+      // let poemResult;
+      // if (selectedTone) {
+      //   poemResult = await generatePoemWithTone({imageUrl: imageUrl, tone: selectedTone});
+      // } else {
+      //   poemResult = await generatePoem({imageUrl: imageUrl});
+      // }
+      // setPoem(poemResult?.poem || 'Failed to generate poem.');
+      
+      // Set a placeholder poem instead
+      setPoem('This is a placeholder poem. GenAI features are disabled.');
 
-      setPoem(poemResult?.poem || 'Failed to generate poem.');
       toast({
         title: 'Poem Generated',
         description: 'Your poem has been generated successfully!',
