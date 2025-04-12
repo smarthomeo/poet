@@ -40,7 +40,8 @@ const poemPrompt = ai.definePrompt({
     }),
   },
   prompt: `You are a poet. Generate a poem based on the image provided.
-The poem should be 4-8 lines long.
+The poem should be at least 3 stanzas.
+Each stanza should be 4-8 lines long.
 The poem should evoke the imagery of the photo.
 
 {{#if tone}}
