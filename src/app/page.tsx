@@ -1,4 +1,3 @@
-
 'use client';
 
 import {useState} from 'react';
@@ -36,6 +35,8 @@ export default function Home() {
   const [poem, setPoem] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const {toast} = useToast();
+  const [selectedTone, setSelectedTone] = useState<string>('');
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,8 +56,8 @@ export default function Home() {
     setLoading(true);
     try {
       let poemResult;
-      if (form.watch('tone')) {
-        poemResult = await generatePoemWithTone({imageUrl: imageUrl, tone: form.watch('tone')});
+      if (selectedTone) {
+        poemResult = await generatePoemWithTone({imageUrl: imageUrl, tone: selectedTone});
       } else {
         poemResult = await generatePoem({imageUrl: imageUrl});
       }
@@ -107,7 +108,7 @@ export default function Home() {
               <FileUpload setImageUrl={setImageUrl} />
             </div>
             <div className="flex-1">
-              <Select onValueChange={form.setValue('tone')}>
+              <Select onValueChange={setSelectedTone}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a Tone"/>
                 </SelectTrigger>
