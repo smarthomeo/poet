@@ -30,6 +30,7 @@ const formSchema = z.object({
 
 export default function Home() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [poem, setPoem] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const {toast} = useToast();
@@ -43,7 +44,7 @@ export default function Home() {
   });
 
   const handleGeneratePoem = async () => {
-    if (!imageUrl) {
+    if (!imageFile) {
       toast({
         title: 'Error',
         description: 'Please upload an image first.',
@@ -53,21 +54,40 @@ export default function Home() {
 
     setLoading(true);
     try {
-      const poemResult = await generatePoem({imageUrl: imageUrl, tone: selectedTone});
-      setPoem(poemResult?.poem || 'Failed to generate poem.');
+      // Convert the image file to base64
+      const fileReader = new FileReader();
+      fileReader.onload = async (event) => {
+        const base64Image = event.target?.result as string;
 
-      toast({
-        title: 'Poem Generated',
-        description: 'Your poem has been generated successfully!',
-      });
+        const poemResult = await generatePoem({
+          imageUrl: base64Image,
+          tone: selectedTone,
+        });
+        setPoem(poemResult?.poem || 'Failed to generate poem.');
+
+        toast({
+          title: 'Poem Generated',
+          description: 'Your poem has been generated successfully!',
+        });
+        setLoading(false);
+      };
+      fileReader.onerror = (error) => {
+        console.error('Error reading file:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to read the image file.',
+        });
+        setLoading(false);
+      };
+      fileReader.readAsDataURL(imageFile); // Read as base64
     } catch (error: any) {
       console.error('Poem generation error:', error);
       toast({
         title: 'Error',
         description: error.message || 'Failed to generate poem.',
       });
-    } finally {
       setLoading(false);
+    } finally {
     }
   };
 
@@ -98,7 +118,7 @@ export default function Home() {
         <CardContent className="grid gap-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
-              <FileUpload setImageUrl={setImageUrl} />
+              <FileUpload setImageUrl={setImageUrl} setImageFile={setImageFile} />
             </div>
             <div className="flex-1">
               <Select onValueChange={setSelectedTone}>
@@ -148,5 +168,3 @@ export default function Home() {
     </div>
   );
 }
-
-    

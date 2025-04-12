@@ -5,9 +5,10 @@ import {Button} from '@/components/ui/button';
 
 interface FileUploadProps {
   setImageUrl: (url: string | null) => void;
+  setImageFile: (file: File | null) => void;
 }
 
-export function FileUpload({setImageUrl}: FileUploadProps) {
+export function FileUpload({setImageUrl, setImageFile}: FileUploadProps) {
   const [file, setFile] = useState<File | null>(null);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -17,7 +18,8 @@ export function FileUpload({setImageUrl}: FileUploadProps) {
     // Create a local URL for the file
     const imageUrl = URL.createObjectURL(file);
     setImageUrl(imageUrl);
-  }, [setImageUrl]);
+    setImageFile(file);
+  }, [setImageUrl, setImageFile]);
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop, accept: {'image/*': ['.jpeg', '.png', '.jpg']}});
 
