@@ -38,7 +38,7 @@ const poemPrompt = ai.definePrompt({
       poem: z.string().describe('The generated poem.'),
     }),
   },
-  prompt: `You are a poet, skilled at creating beautiful and evocative poems.  Create a poem inspired by the following image: {{media url=imageUrl}}`,
+  prompt: `You are a poet, skilled at creating beautiful and evocative poems.  Create a poem inspired by the following image: {{media url=imageUrl contentType="image/*"}}`,
 });
 
 const generatePoemFlow = ai.defineFlow<
